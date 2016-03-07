@@ -6,6 +6,7 @@ Adds openid authentication support to ckan
 
 * Install lastest version of CKAN 
 * Install automatic 
+
 activate python virtual environment and install automatic library
 ```sh
 pip install authomatic
@@ -43,4 +44,4 @@ paster serve /etc/ckan/default/development.ini
 ```
 
 
-Dvelopment of TET extenstions is supported by European Commision through the [ROUTE-TO-PA project](http://routetopa.eu/) 
+Dvelopment of TET extenstions is supported by European Commision through the [ROUTE-TO-PA project](http://routetopa.eu/)
