@@ -35,7 +35,7 @@ python setup.py develop
 
 Add 'pivottable' plugin to CKAN config file :
 ```sh
-ckan.plugins = stats text_view recline_view ckanext-openid
+ckan.plugins = stats text_view recline_view openid
 ```
 
 start ckan
