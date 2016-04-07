@@ -33,7 +33,7 @@ build the plugin
 python setup.py develop
 ```
 
-Add 'pivottable' plugin to CKAN config file :
+Add 'openid' plugin to CKAN config file :
 ```sh
 ckan.plugins = stats text_view recline_view openid
 ```
