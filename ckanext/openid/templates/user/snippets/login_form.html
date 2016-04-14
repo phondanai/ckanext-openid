@@ -29,14 +29,27 @@ Example:
     {% endblock %}
   </div>
 </form>
-<form  action="oilogin">
-  <div class="well pull-left well-large">
+
+
+
+<h3>{{ _('Login with OpenID') }}</h3>
+
+<form action="oilogin" class="form-horizontal">
+
     <div class="control-group control-medium">
-      <label class="control-label" for="field-login">{{ _('Open ID') }}</label>
-      <div class="controls ">
-        <input type="text" name="id" value="http://spod.routetopa.eu/openid/" />
-      </div>
+	    <span style="text-align: right; margin-bottom: 0; padding-right: 20px; display: block; width: 120px;">
+	        <img src="/images/openid-icon-100x100.png" width="50px" class="" alt="OpenID logo" />
+	    </span>
     </div>
-    <input class="btn" type="submit" value="{{ _('Login with OpenID')}}">
-  </div>
+    <div class="control-group control-medium">
+        <label class="control-label">{{ _('Open ID URL') }}</label>
+        <div class="controls">
+            <input type="text" name="id" placeholder="http://spod.routetopa.eu/openid/" />
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <input class="btn btn-primary" type="submit" value="{{ _('Login with OpenID')}}">
+    </div>
+
 </form>

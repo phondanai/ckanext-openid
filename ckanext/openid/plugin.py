@@ -74,7 +74,6 @@ class OpenidPlugin(plugins.SingletonPlugin):
         toolkit.add_resource('fanstatic', 'openid')
 
     # IAuthenticator
-
     def identify(self):
     	user = pylons.session.get('openid-user')
     	if user:
