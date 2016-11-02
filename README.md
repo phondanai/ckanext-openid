@@ -23,7 +23,7 @@ activate python virtual env
 clone git repository
 
 ```sh
-git clone https://gitlab.insight-centre.org/egov/ckanext-openid.git
+git clone https://github.com/routetopa/ckanext-openid.git
 cd ckanext-openid
 ```
 
