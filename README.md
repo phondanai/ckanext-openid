@@ -10,6 +10,7 @@ Adds openid authentication support to ckan
 activate python virtual environment and install automatic library
 ```sh
 pip install authomatic
+pip install python-openid
 ```
 
 ## Build instructions 
