@@ -1,6 +1,6 @@
 # CKAN openid extension 
 
-Adds openid authentication support to ckan 
+This extension adds suuport of OpenID authentification to your ckan platform (link: http://openid.net/what-is-openid/).
 
 ## Prerequisites
 
@@ -9,37 +9,36 @@ Adds openid authentication support to ckan
 
 activate python virtual environment and install automatic library
 ```sh
-pip install authomatic
-pip install python-openid
+pip install authomatic python-openid
 ```
 
 ## Build instructions 
 
-activate python virtual env 
+* Activate python virtual env 
 
 ```sh
 . /usr/lib/ckan/default/bin/activate
 ```
 
-clone git repository
+* Clone git repository
 
 ```sh
 git clone https://github.com/routetopa/ckanext-openid.git
 cd ckanext-openid
 ```
 
-build the plugin
+* Build the plugin
 
 ```sh
 python setup.py develop
 ```
 
-Add 'openid' plugin to CKAN config file :
+* Add 'openid' plugin to CKAN config file :
 ```sh
 ckan.plugins = stats text_view recline_view openid
 ```
 
-start ckan
+* Start ckan
 ```sh
 paster serve /etc/ckan/default/development.ini
 ```
