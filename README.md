@@ -7,7 +7,7 @@ This extension adds suuport of OpenID authentification to your ckan platform (li
 * Install lastest version of CKAN 
 * Install automatic 
 
-activate python virtual environment and install automatic library
+Activate python virtual environment and install automatic library
 ```sh
 pip install authomatic python-openid
 ```
