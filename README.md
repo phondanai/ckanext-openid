@@ -1,6 +1,6 @@
 # CKAN openid extension 
 
-This extension adds suuport of OpenID authentification to your ckan platform (link: http://openid.net/what-is-openid/).
+This extension adds support of OpenID authentification to your CKAN platform (link: http://openid.net/what-is-openid/).
 
 ## Prerequisites
 
