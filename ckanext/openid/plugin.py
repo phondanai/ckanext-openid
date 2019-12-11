@@ -1,3 +1,4 @@
+from ckan.common import session
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.model
@@ -14,7 +15,7 @@ from authomatic import Authomatic
 from authomatic.adapters import WebObAdapter
 import uuid
 
-CONFIG = { 
+CONFIG = {
     'oi': {
         'class_': openid.OpenID,
     }
@@ -49,11 +50,11 @@ class OpenIDController(BaseController):
                     	       'email': result.user.email,
                                'name': unique_string(),
                                'password': unique_string()})
-			pylons.session['openid-user'] = user['name']
-			pylons.session.save()
+			session['openid-user'] = user['name']
+			session.save()
 			ckan.lib.base.redirect("/")
-       
- 
+
+
 class OpenidPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IAuthenticator, inherit=True)
@@ -75,14 +76,14 @@ class OpenidPlugin(plugins.SingletonPlugin):
 
     # IAuthenticator
     def identify(self):
-    	user = pylons.session.get('openid-user')
+        user = session.get('openid-user')
     	if user:
     		toolkit.c.user = user
 
     def distory_session(self):
-        if 'openid-user' in pylons.session:
-            del pylons.session['openid-user']
-        pylons.session.save()
+        if 'openid-user' in session:
+            del session['openid-user']
+        session.save()
 
     def logout(self):
         self.distory_session()
