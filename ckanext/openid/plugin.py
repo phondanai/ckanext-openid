@@ -4,16 +4,20 @@ import ckan.plugins.toolkit as toolkit
 import ckan.model
 import pylons
 import pylons.config as config
+from ckan.lib import base
+from ckan.model import User
+import ckan.lib.helpers as h
 from ckan.lib.base import BaseController
 from ckan.common import json, response, request
 import logging
 log = logging.getLogger(__name__)
-from ckan.common import json, response, request
 from pylons.controllers.util import redirect_to, redirect
 from authomatic.providers import oauth2, oauth1, openid
 from authomatic import Authomatic
 from authomatic.adapters import WebObAdapter
 import uuid
+import urlparse
+
 
 CONFIG = {
     'oi': {
@@ -21,8 +25,14 @@ CONFIG = {
     }
 }
 
+redirect = h.redirect_to
+
+def get_username(openid):
+    return urlparse.urlparse(openid).path.split('/')[-1].strip().lower()
+
 def get_user(openid):
-	user = ckan.model.User.by_openid(openid)
+        username = get_username(openid)
+	user = User.by_name(username)
 	if user:
 		user_dict = toolkit.get_action('user_show')(data_dict={'id': user.id})
 		return user_dict
@@ -39,26 +49,32 @@ class OpenIDController(BaseController):
 		result = authomatic.login(WebObAdapter(request, response), "oi")
 		if result:
 			if result.error:
-				ckan.lib.base.redirect("/user/logged_in")
+				redirect("/user/logged_in")
 			if not (result.user.name and result.user.id):
 				result.user.update()
 			user = get_user(result.user.id)
 			if not user:
 				 user = toolkit.get_action('user_create')(
                     context={'ignore_auth': True},
-                    data_dict={'openid' :result.user.id,
-                    	       'email': result.user.email,
-                               'name': unique_string(),
+                    data_dict={'email': result.user.email,
+                               'name': get_username(result.user.id),
                                'password': unique_string()})
 			session['openid-user'] = user['name']
 			session.save()
-			ckan.lib.base.redirect("/")
+			redirect("/")
 
 
 class OpenidPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IAuthenticator, inherit=True)
     plugins.implements(plugins.IRoutes, inherit=True)
+
+    def configure(self, config):
+         required_keys = ('ckan.openid.default_provider',)
+
+         for key in required_keys:
+             if config.get(key) is None:
+                 raise RunTimeError('Required configuration option {0} not found.'.format(key))
 
     @staticmethod
     def before_map(m):
